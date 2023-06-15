@@ -33,6 +33,8 @@ void InserSort(int* a, int n)
 	
 }
 
+
+//时间复杂度平均为O(N^1.3)
 void ShellSort(int* a, int n)
 {
 	////方法一
