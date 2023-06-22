@@ -91,3 +91,12 @@ void ShellSort(int* a, int n)
 		}
 	}
 }
+
+
+void SelectSort(int* a, int n)
+{
+	assert(a);
+	int begin = 0, end = n - 1;
+
+
+}
