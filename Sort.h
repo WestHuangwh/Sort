@@ -17,4 +17,8 @@ void ShellSort(int* a, int n);
 void SelectSort(int* a, int n);
 
 //∂—≈≈–Ú
+//void A
 void HeapSort(int* a, int n);
+
+//√∞≈›≈≈–Ú
+void BubbleSort(int* a, int n);

@@ -101,6 +101,8 @@ void Swap(int* p1, int* p2)
 
 }
 
+// O (N^2)
+//选择排序对比插入排序，发现是插入排序更好
 void SelectSort(int* a, int n)
 {
 	assert(a);//断言检查是否为空指针
@@ -130,6 +132,23 @@ void SelectSort(int* a, int n)
 		Swap(&a[end], &a[maxi]);
 		++begin;
 		--end;
+	}
+
+}
+
+void BubbleSort(int* a, int n)
+{
+	assert(a);//断言检查是否为空
+	for (int j = 0; j < n; j++)
+	{
+		for (int i = 1; i < n; i++)
+		{
+			if (a[i - 1] > a[i])
+			{
+				Swap(&a[i - 1], &a[i]);
+			}
+		}
+
 	}
 
 }

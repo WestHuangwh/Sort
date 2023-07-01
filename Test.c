@@ -21,11 +21,17 @@ void TestSelectSort()//÷±Ω”—°‘Ò≈≈–Ú
 	
 }
 
+void TestBubbleSort()//√∞≈›≈≈–Ú
+{
+
+}
+
 int main()
 {
 	//TestInserSort();
 	//TestShellSort();
-	TestSelectSort();
+	//TestSelectSort();
+	TestBubbleSort();
 	return 0;
 }
 
