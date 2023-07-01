@@ -103,7 +103,7 @@ void Swap(int* p1, int* p2)
 
 void SelectSort(int* a, int n)
 {
-	assert(a);
+	assert(a);//断言检查是否为空指针
 	int begin = 0, end = n - 1;
 	while (begin < end)
 	{
@@ -122,10 +122,14 @@ void SelectSort(int* a, int n)
 
 		}
 		Swap(&a[begin], &a[mini]);
+		//如果begin和maxi重叠，那么要修正一下maxi的位置
+		if (begin == maxi)
+		{
+			maxi = mini;
+		}
 		Swap(&a[end], &a[maxi]);
 		++begin;
 		--end;
-
 	}
 
 }
