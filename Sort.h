@@ -7,8 +7,14 @@
 //打印数组
 void PrintArray(int* a, int n);
 
-// 插入排序
+// 直接插入排序
 void InserSort(int* a, int n);
 
 //希尔排序
 void ShellSort(int* a, int n);
+
+//直接选择排序
+void SelectSort(int* a, int n);
+
+//堆排序
+void HeapSort(int* a, int n);

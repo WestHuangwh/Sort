@@ -92,6 +92,14 @@ void ShellSort(int* a, int n)
 	}
 }
 
+//交换两个数
+void Swap(int* p1, int* p2)
+{
+	int tmp = *p1;
+	*p1 = *p2;
+	*p2 = tmp;
+
+}
 
 void SelectSort(int* a, int n)
 {
