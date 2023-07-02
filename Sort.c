@@ -141,11 +141,11 @@ void BubbleSort(int* a, int n)
 	assert(a);//¶ÏÑÔ¼ì²éÊÇ·ñÎª¿Õ
 	for (int j = 0; j < n; j++)
 	{
-		for (int i = 1; i < n; i++)
+		for (int i = 1; i < n-j; i++)
 		{
-			if (a[i - 1] > a[i])
+			if (a[i-1] > a[i])
 			{
-				Swap(&a[i - 1], &a[i]);
+				Swap(&a[i-1], &a[i]);
 			}
 		}
 
