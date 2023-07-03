@@ -17,7 +17,7 @@ void ShellSort(int* a, int n);
 void SelectSort(int* a, int n);
 
 //堆排序
-//void A
+//void AddjustDown();//向下调整算法
 void HeapSort(int* a, int n);
 
 //冒泡排序
