@@ -136,19 +136,26 @@ void SelectSort(int* a, int n)
 
 }
 
+//时间复杂度：O(N^2)    最好的情况：O(N)
+//对比 插入排序，谁更好？-- 插入
 void BubbleSort(int* a, int n)
 {
 	assert(a);//断言检查是否为空
 	for (int j = 0; j < n; j++)
 	{
+		int exchange = 0;
 		for (int i = 1; i < n-j; i++)
 		{
 			if (a[i-1] > a[i])
 			{
 				Swap(&a[i-1], &a[i]);
+				exchange = 1;
 			}
 		}
-
+		if (exchange == 0)
+		{
+			break;
+		}
 	}
 
 }
