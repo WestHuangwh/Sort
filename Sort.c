@@ -160,3 +160,37 @@ void BubbleSort(int* a, int n)
 
 }
 
+void QuickSort(int* a, int begin,int end)
+{
+	//区间不存在，或者只有一个值不需要再处理 
+	if (begin >= end)
+	{
+		return;
+	}
+	assert(a);//断言检查是否为空
+	int left = begin;
+	int right = end;
+	int keyi = left;
+	while (left < right)
+	{
+		//右边先走，找小
+		while (left < right && a[right] >= a[keyi])
+		{
+			--right;
+		}
+
+		//左边再走，找大 
+		while (left < right && a[left] <= a[keyi])
+		{
+			++left;
+		}
+		Swap(&a[left], &a[right]);
+	}
+	Swap(&a[keyi], &a[left]);
+	keyi = left;
+
+	//[begin,keyi-1] keyi [keyi+1,end]
+	QuickSort(a, begin, keyi-1);
+	QuickSort(a, keyi+1, end);
+
+}

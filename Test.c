@@ -29,12 +29,21 @@ void TestBubbleSort()//≤‚ ‘√∞≈›≈≈–Ú
 
 }
 
+void TestQuickSort()//≤‚ ‘øÏÀŸ≈≈–Ú
+{
+	int a[] = { 2,7,5,3,9,1,10,4,8,6 };
+	QuickSort(a, 0, sizeof(a) / sizeof(a[0]) - 1);
+	PrintArray(a, sizeof(a) / sizeof(a[0]));
+
+}
+
 int main()
 {
 	//TestInserSort();
 	//TestShellSort();
 	//TestSelectSort();
-	TestBubbleSort();
+	//TestBubbleSort();
+	TestQuickSort();	
 	return 0;
 }
 
