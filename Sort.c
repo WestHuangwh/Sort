@@ -160,14 +160,13 @@ void BubbleSort(int* a, int n)
 
 }
 
-void QuickSort(int* a, int begin,int end)
+
+
+//-------------快速排序以及快速排序的几种优化方法---------------
+
+//Hoare  霍尔版本的快速排序
+int PartSort1(int* a, int begin, int end)
 {
-	//区间不存在，或者只有一个值不需要再处理 
-	if (begin >= end)
-	{
-		return;
-	}
-	assert(a);//断言检查是否为空
 	int left = begin;
 	int right = end;
 	int keyi = left;
@@ -188,9 +187,50 @@ void QuickSort(int* a, int begin,int end)
 	}
 	Swap(&a[keyi], &a[left]);
 	keyi = left;
+	return keyi;
+}
+
+//挖坑法的快速排序
+int PartSort2(int* a, int begin, int end)
+{
+	int key = a[begin];
+	int piti = begin;
+	while (begin < end)
+	{
+		//右边找小，填到左边的坑里去。这个位置形成新的坑
+		while (begin < end && a[end] >= key)
+		{
+			end--;
+		}
+		a[piti] = a[end];
+		piti = end;
+
+		//左边找大，填到右边的坑里去，这个位置形成新的坑
+		while (begin < end && a[begin] <= key)
+		{
+			begin++;
+		}
+		a[piti] = a[begin];
+		piti = begin;
+	}
+	a[piti] = key;
+	return piti;
+}
+
+void QuickSort(int* a, int begin,int end)
+{
+	//区间不存在，或者只有一个值不需要再处理 
+	if (begin >= end)
+	{
+		return;
+	}
+
+	int keyi = PartSort1(a, begin, end);
 
 	//[begin,keyi-1] keyi [keyi+1,end]
 	QuickSort(a, begin, keyi-1);
 	QuickSort(a, keyi+1, end);
 
 }
+
+
