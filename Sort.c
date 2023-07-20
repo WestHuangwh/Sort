@@ -217,6 +217,28 @@ int PartSort2(int* a, int begin, int end)
 	return piti;
 }
 
+//前后指针法的快速排序
+int PartSort3(int* a, int begin, int end)
+{
+	int prev = begin;
+	int cur = begin + 1;
+	int keyi = begin;
+
+	while (cur <= end)
+	{
+		//cur位置的值小于keyi位置的值
+		if (a[cur] < a[keyi]&& ++prev != cur)
+		{
+			Swap(&a[prev], &a[cur]);
+		}
+
+		cur++;
+	}
+	Swap(&a[prev], &a[keyi]);
+	keyi = prev;
+	return keyi;
+}
+
 void QuickSort(int* a, int begin,int end)
 {
 	//区间不存在，或者只有一个值不需要再处理 
@@ -225,7 +247,7 @@ void QuickSort(int* a, int begin,int end)
 		return;
 	}
 
-	int keyi = PartSort1(a, begin, end);
+	int keyi = PartSort3(a, begin, end);
 
 	//[begin,keyi-1] keyi [keyi+1,end]
 	QuickSort(a, begin, keyi-1);
