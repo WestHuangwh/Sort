@@ -25,3 +25,9 @@ void BubbleSort(int* a, int n);
 
 //快速排序
 void QuickSort(int*a,int begin,int end);
+
+//快速排序的非递归实现
+void QuickSortNonR(int* a, int begin, int end);
+
+//声明变量
+extern int callCount;

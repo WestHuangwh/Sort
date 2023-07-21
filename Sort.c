@@ -1,4 +1,7 @@
 #include"Sort.h"
+#include"Stack.h"
+
+int callCount = 0;//callCout是为了测试快速排序中递归调用的次数
 
 void PrintArray(int* a, int n)
 {
@@ -164,6 +167,43 @@ void BubbleSort(int* a, int n)
 
 //-------------快速排序以及快速排序的几种优化方法---------------
 
+//利用三数取中优化快速排序，使基准值避免取到最大值或者最小值，让快速排序不会出现最坏的情况
+int GetMidIndex(int* a, int begin, int end)
+{
+
+	int mid = (begin + end) / 2;
+	if (a[begin] < a[mid])
+	{
+		if (a[mid] < a[end])
+		{
+			return mid;
+		}
+		else if (a[begin] < a[end])
+		{
+			return end;
+		}
+		else
+		{
+			return begin;
+		}
+	}
+	else
+	{
+		if (a[mid] > a[end])
+		{
+			return mid;
+		}
+		else if (a[end] < a[begin])
+		{
+			return end;
+		}
+		else
+		{
+			return begin;
+		}
+	}
+}
+
 //Hoare  霍尔版本的快速排序
 int PartSort1(int* a, int begin, int end)
 {
@@ -224,6 +264,10 @@ int PartSort3(int* a, int begin, int end)
 	int cur = begin + 1;
 	int keyi = begin;
 
+	//加入三数取中的优化
+	int midi = GetMidIndex(a, begin, end);
+	Swap(&a[keyi], &a[midi]);
+
 	while (cur <= end)
 	{
 		//cur位置的值小于keyi位置的值
@@ -241,18 +285,42 @@ int PartSort3(int* a, int begin, int end)
 
 void QuickSort(int* a, int begin,int end)
 {
+	//callCount++;
+	//printf("%p\n", &callCount);
+
 	//区间不存在，或者只有一个值不需要再处理 
 	if (begin >= end)
 	{
 		return;
 	}
 
-	int keyi = PartSort3(a, begin, end);
-
-	//[begin,keyi-1] keyi [keyi+1,end]
-	QuickSort(a, begin, keyi-1);
-	QuickSort(a, keyi+1, end);
+	if (end - begin > 10)
+	{
+		int keyi = PartSort3(a, begin, end);
+		//[begin,keyi-1] keyi [keyi+1,end]
+		QuickSort(a, begin, keyi-1);
+		QuickSort(a, keyi+1, end);
+	}
+	else
+	{
+		InserSort(a + begin, end - begin + 1);
+	}
 
 }
 
+//要求掌握递归 改非递归，
+//递归大问题：极端场景下，如果深度太深，会出现栈溢出
+//1.直接改循环-- 比如斐波那契数列，归并排序 
+//2.用数据结构栈模拟递归过程
+void QuickSortNonR(int* a, int begin, int end)
+{
+	ST st;
+	StackInit(&st);
+	StackPush(&st, end);
+	StackPush(&st, begin);
+
+
+
+	StackDestroy(&st);
+}
 
