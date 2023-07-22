@@ -314,12 +314,36 @@ void QuickSort(int* a, int begin,int end)
 //2.用数据结构栈模拟递归过程
 void QuickSortNonR(int* a, int begin, int end)
 {
-	ST st;
-	StackInit(&st);
-	StackPush(&st, end);
+	ST st;//创建一个栈
+	StackInit(&st);//初始化栈
+	StackPush(&st, end);//入栈
 	StackPush(&st, begin);
 
+	while (!StackEmpty(&st))
+	{
+		int left = StackTop(&st);
+		StackPop(&st);
 
+		int right = StackTop(&st);
+		StackPop(&st);
+
+		int keyi = PartSort3(a, left, right);
+		//[left,keyi-1] keyi [keyi+1,right]
+
+
+		if (keyi+1 < right)
+		{
+			StackPush(&st, right);
+			StackPush(&st, keyi + 1);
+
+		}
+		if (left < keyi - 1)
+		{
+			StackPush(&st, keyi - 1);
+			StackPush(&st, left);
+		}
+
+	}
 
 	StackDestroy(&st);
 }

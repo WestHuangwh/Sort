@@ -29,5 +29,8 @@ void QuickSort(int*a,int begin,int end);
 //快速排序的非递归实现
 void QuickSortNonR(int* a, int begin, int end);
 
+//归并排序
+void MergeSort(int* a, int begin, int end);
+
 //声明变量
 extern int callCount;
