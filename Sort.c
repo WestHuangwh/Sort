@@ -411,7 +411,7 @@ void MergeSort(int* a, int n)
 //归并排序的非递归实现 
 void MergeSortNonR(int* a, int n)
 {
-	int* tmp = (int*)malloc(n*sizeof(int));//额外在堆上开辟一个大小为n的数组
+	int* tmp = (int*)malloc(sizeof(int)*n);//额外在堆上开辟一个大小为n的数组
 	if (tmp == NULL)//进行判空处理 ，如果为空则返回
 	{
 		printf("malloc fail\n");
@@ -427,6 +427,18 @@ void MergeSortNonR(int* a, int n)
 
 			int begin1 = i, end1 = i + gap - 1;
 			int begin2 = i + gap, end2 = i + 2 * gap - 1;
+
+			//end1越界或者begin3越界，则可以不归并了
+			if (end1 >= n || begin2 >= n)
+			{
+				break;
+			}
+			else if (end2 >= n)
+			{
+				end2 = n - 1;
+			}
+
+			int m = end2 - begin1 + 1;
 			int j = begin1;
 			while (begin1 <= end1 && begin2 <= end2)
 			{
@@ -439,18 +451,24 @@ void MergeSortNonR(int* a, int n)
 					tmp[j++] = a[begin2++];
 				}
 			}
-				while (begin1 <= end1)
+			while (begin1 <= end1)
 			{
-				tmp[i++] = a[begin1++];
+				tmp[j++] = a[begin1++];
 			}
 			while (begin2 <= end2)
 			{
 				tmp[j++] = a[begin2++];
 			}
 
+			memcpy(a + i, tmp + i, sizeof(int) * m);
 		}
-		memcpy(a, tmp, sizeof(int) * n);
 		gap *= 2;
 	}
 	free(tmp);
+}
+
+
+void CountSort(int* a, int n)
+{
+
 }
