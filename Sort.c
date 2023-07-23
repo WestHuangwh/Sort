@@ -468,7 +468,46 @@ void MergeSortNonR(int* a, int n)
 }
 
 
+//时间复杂度：O(max(range,N)) -- 比较range还是N比较大
+//空间复杂度：O(range)
 void CountSort(int* a, int n)
 {
+	int min = a[0], max = a[0];
+	for (int i = 0; i < n; i++)//选出最大值和最小值
+	{
+		if (a[i] < min)
+		{
+			min = a[i];
+		}
+		if (a[i] > max)
+		{
+			max = a[i];
+		}
 
+	}
+	//统计次数的数组
+	int range = max - min + 1;
+	int* count = (int*)malloc(sizeof(int) * range);
+	if (count == NULL)
+	{
+		printf("malloc fail\n");
+		exit(-1);
+	}
+	memset(count, 0, sizeof(int) * range);
+
+	//统计次数
+	for (int i = 0; i < n; i++)
+	{
+		count[a[i] - min]++;
+	}
+
+	//回写-排序
+	int j = 0;
+	for (int i = 0; i < range; i++)
+	{
+		while (count[i]--)
+		{
+			a[j++] = i + min;
+		}
+	}
 }

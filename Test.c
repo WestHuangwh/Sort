@@ -60,6 +60,14 @@ void TestMergeSort()
 
 }
 
+void TestCountSort()
+{
+	int a[] = { 10,15,19,10,15,14,18,10 };
+	CountSort(a, sizeof(a) / sizeof(a[0]));
+
+	PrintArray(a, sizeof(a) / sizeof(a[0]));
+}
+
 int main()
 {
 	//TestInserSort();
@@ -68,7 +76,8 @@ int main()
 	//TestBubbleSort();
 	//TestQuickSort();	
 	//PrintQuickSortCount();//测试快速排序的递归调用次数
-	TestMergeSort();
+	//TestMergeSort();
+	TestCountSort();
 
 	return 0;
 }
