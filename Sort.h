@@ -3,6 +3,7 @@
 #include<stdio.h>
 #include<assert.h>
 #include<stdlib.h>
+#include<string.h>
 
 //打印数组
 void PrintArray(int* a, int n);
@@ -30,7 +31,10 @@ void QuickSort(int*a,int begin,int end);
 void QuickSortNonR(int* a, int begin, int end);
 
 //归并排序
-void MergeSort(int* a, int begin, int end);
+void MergeSort(int* a, int n);
+
+//归并排序的非递归实现
+void MergeSortNonR(int* a, int n);
 
 //声明变量
 extern int callCount;

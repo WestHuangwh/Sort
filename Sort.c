@@ -348,3 +348,109 @@ void QuickSortNonR(int* a, int begin, int end)
 	StackDestroy(&st);
 }
 
+//------------归并排序--------------------------------
+//时间复杂度：O(N*logN)
+//空间复杂度：O(N)
+
+//归并排序的一个子函数
+void _MergeSort(int* a, int begin, int end,int*tmp)
+{
+	if (begin >= end)
+	{
+		return;
+	}
+	int mid = (begin + end) / 2;//三位取中，得出中间值的下标
+
+	//[begin,mid][mid+1,end] 分治递归，让子区间有序
+	_MergeSort(a, begin, mid,tmp);
+	_MergeSort(a, mid + 1, end,tmp);
+
+	//归并[begin,mid][mid+1,end]
+	int begin1 = begin, end1 = mid;
+	int begin2 = mid + 1, end2 = end;
+	int i = begin1;
+	while (begin1 <= end1 && begin2 <= end2)
+	{
+		if (a[begin1] < a[begin2])
+		{
+			tmp[i++] = a[begin1++];
+		}
+		else
+		{
+			tmp[i++] = a[begin2++];
+		}
+	}
+	while (begin1 <= end1)
+	{
+		tmp[i++] = a[begin1++];
+	}
+	while (begin2<=end2)
+	{
+		tmp[i++] = a[begin2++];
+	}
+
+	//把归并数据拷回原数组
+	memcpy(a + begin, tmp + begin, (end - begin + 1) * sizeof(int));
+
+}
+
+void MergeSort(int* a, int n)
+{
+	int* tmp = (int*)malloc(sizeof(int) * n);//额外在堆上开辟一个大小为n的数组
+	if (tmp == NULL)//进行判空处理 ，如果为空则返回
+	{
+		printf("malloc fail\n");
+		exit(-1);
+	}
+
+	_MergeSort(a, 0, n - 1, tmp);//利用子函数进行操作
+
+	free(tmp);
+}
+
+//归并排序的非递归实现 
+void MergeSortNonR(int* a, int n)
+{
+	int* tmp = (int*)malloc(n*sizeof(int));//额外在堆上开辟一个大小为n的数组
+	if (tmp == NULL)//进行判空处理 ，如果为空则返回
+	{
+		printf("malloc fail\n");
+		exit(-1);
+	}
+
+	int gap = 1;
+	while (gap<n)
+	{
+		for (int i = 0; i < n; i += 2 * gap)
+		{
+			//[i,i+gap-1][i+gap,i+2*gap-1]
+
+			int begin1 = i, end1 = i + gap - 1;
+			int begin2 = i + gap, end2 = i + 2 * gap - 1;
+			int j = begin1;
+			while (begin1 <= end1 && begin2 <= end2)
+			{
+				if (a[begin1] < a[begin2])
+				{
+					tmp[j++] = a[begin1++];
+				}
+				else
+				{
+					tmp[j++] = a[begin2++];
+				}
+			}
+				while (begin1 <= end1)
+			{
+				tmp[i++] = a[begin1++];
+			}
+			while (begin2 <= end2)
+			{
+				tmp[j++] = a[begin2++];
+			}
+
+		}
+		memcpy(a, tmp, sizeof(int) * n);
+		gap *= 2;
+	}
+	free(tmp);
+}

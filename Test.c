@@ -47,14 +47,28 @@ void PrintQuickSortCount()//打印快速排序递归的次数
 	printf("callCount:%d\n", callCount);
 }
 
+void TestMergeSort()
+{
+	int a[] = { 10,6,7,1,3,9,4,2};
+	//int a[] = { 2,7,5,3,9,1,10,4,8,6 };
+
+	//MergeSort(a, sizeof(a) / sizeof(a[0]));//递归的归并排序
+
+	MergeSortNonR(a, sizeof(a) / sizeof(a[0]));//非递归的归并排序
+
+	PrintArray(a, sizeof(a) / sizeof(a[0]));
+
+}
+
 int main()
 {
 	//TestInserSort();
 	//TestShellSort();
 	//TestSelectSort();
 	//TestBubbleSort();
-	TestQuickSort();	
-	//PrintQuickSortCount();
+	//TestQuickSort();	
+	//PrintQuickSortCount();//测试快速排序的递归调用次数
+	TestMergeSort();
 
 	return 0;
 }
